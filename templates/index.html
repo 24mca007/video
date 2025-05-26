@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">
+                <i class="fas fa-download"></i>
+                Social Media Downloader
+            </h1>
+            <p class="subtitle">Download videos and posts from your favorite platforms</p>
+        </header>
+
+        <!-- Platform Selection -->
+        <div id="platform-selection" class="platform-section">
+            <h2 class="section-title">Select Platform</h2>
+            <div class="platform-grid">
+                <div class="platform-card instagram" data-platform="instagram">
+                    <div class="platform-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3>Instagram</h3>
+                    <p>Posts, Stories, Reels</p>
+                </div>
+
+                <div class="platform-card facebook" data-platform="facebook">
+                    <div class="platform-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <h3>Facebook</h3>
+                    <p>Videos, Posts</p>
+                </div>
+
+                <div class="platform-card tiktok" data-platform="tiktok">
+                    <div class="platform-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <h3>TikTok</h3>
+                    <p>Short Videos</p>
+                </div>
+
+                <div class="platform-card youtube" data-platform="youtube">
+                    <div class="platform-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <h3>YouTube</h3>
+                    <p>Videos, Shorts</p>
+                </div>
+
+                <div class="platform-card twitter" data-platform="twitter">
+                    <div class="platform-icon">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <h3>Twitter</h3>
+                    <p>Videos, GIFs</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Interface -->
+        <div id="download-interface" class="download-section hidden">
+            <div class="platform-header">
+                <button id="back-btn" class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                    Back
+                </button>
+                <div class="selected-platform">
+                    <div class="platform-icon-small">
+                        <i id="selected-icon" class="fab fa-instagram"></i>
+                    </div>
+                    <span id="selected-name">Instagram</span>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <input type="url" id="url-input" placeholder="Paste your link here..." required>
+                    <button id="fetch-btn" class="fetch-button">
+                        <span class="btn-text">Fetch</span>
+                        <div class="loader hidden">
+                            <div class="spinner"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" class="results hidden">
+                <div class="media-info">
+                    <div class="thumbnail-container">
+                        <img id="thumbnail" src="" alt="Thumbnail" class="thumbnail">
+                    </div>
+                    <div class="media-details">
+                        <h3 id="media-title" class="media-title"></h3>
+                        <p id="media-author" class="media-author"></p>
+                        <div id="media-duration" class="media-duration"></div>
+                    </div>
+                </div>
+
+                <div class="download-options">
+                    <h4>Download Options</h4>
+                    
+                    <!-- Quality Options -->
+                    <div id="quality-options" class="quality-grid">
+                        <button class="quality-btn" data-quality="380p">
+                            <i class="fas fa-download"></i>
+                            <span class="quality-label">380p</span>
+                            <span class="file-size"></span>
+                        </button>
+                        <button class="quality-btn" data-quality="720p">
+                            <i class="fas fa-download"></i>
+                            <span class="quality-label">720p</span>
+                            <span class="file-size"></span>
+                        </button>
+                        <button class="quality-btn" data-quality="1080p">
+                            <i class="fas fa-download"></i>
+                            <span class="quality-label">1080p</span>
+                            <span class="file-size"></span>
+                        </button>
+                    </div>
+
+                    <!-- Single Download Button -->
+                    <div id="single-download" class="single-download hidden">
+                        <button id="download-video" class="download-btn primary">
+                            <i class="fas fa-video"></i>
+                            Download Video
+                        </button>
+                    </div>
+
+                    <!-- Audio Download -->
+                    <div id="audio-download" class="audio-download hidden">
+                        <button id="download-audio" class="download-btn audio">
+                            <i class="fas fa-music"></i>
+                            Download Audio Only
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="error-message" class="error-message hidden">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span id="error-text"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Processing your request...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
